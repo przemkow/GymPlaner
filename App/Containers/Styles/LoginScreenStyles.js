@@ -45,6 +45,10 @@ export default StyleSheet.create({
     textAlign: 'center',
     color: Colors.silver
   },
+  skipLoginText: {
+    textAlign: 'center',
+    color: Colors.charcoal
+  },
   topLogo: {
     alignSelf: 'center',
     resizeMode: 'contain'

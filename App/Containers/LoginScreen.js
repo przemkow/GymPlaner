@@ -13,8 +13,16 @@ import { connect } from 'react-redux'
 import Styles from './Styles/LoginScreenStyles'
 import {Images, Metrics} from '../Themes'
 import LoginActions from '../Redux/LoginRedux'
+import { NavigationActions } from 'react-navigation'
 
 class LoginScreen extends React.Component {
+  // TODO move it to saga.
+  goToHome = NavigationActions.reset({
+    index: 0,
+    actions: [
+      NavigationActions.navigate({ routeName: 'HomeNavigation' })
+    ]
+  })
 
   static propTypes = {
     dispatch: PropTypes.func,
@@ -147,6 +155,12 @@ class LoginScreen extends React.Component {
               </View>
             </TouchableOpacity>
           </View>
+          <TouchableOpacity style={Styles.loginButtonWrapper}
+            onPress={() => this.props.navigation.dispatch(this.goToHome)}>
+            <View style={Styles.loginButton}>
+              <Text style={Styles.skipLoginText}>Continue without an account</Text>
+            </View>
+          </TouchableOpacity>
         </View>
 
       </ScrollView>
