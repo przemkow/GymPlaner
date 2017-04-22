@@ -2,6 +2,7 @@ import React from 'react'
 import { StackNavigator } from 'react-navigation'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import TrainingsList from '../../../Containers/TrainingsListScreen'
+import NewTraining from '../../../Containers/NewTrainingScreen'
 
 // Manifest of possible screens
 const TrainingsNavigation = StackNavigator({
@@ -18,6 +19,12 @@ const TrainingsNavigation = StackNavigator({
           />
         )
       })
+    }
+  },
+  NewTrainingsScreen: {
+    screen: NewTraining,
+    navigationOptions: {
+      title: 'New trainings'
     }
   }
 }, {

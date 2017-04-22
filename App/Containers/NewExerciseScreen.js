@@ -1,23 +1,19 @@
 import React from 'react'
-import { ScrollView, Text, KeyboardAvoidingView, Button } from 'react-native'
+import { ScrollView, Text, KeyboardAvoidingView } from 'react-native'
 import { connect } from 'react-redux'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
 
 // Styles
-import styles from './Styles/TrainingsListScreenStyle'
+import styles from './Styles/NewExerciseScreenStyle'
 
-class TrainingsList extends React.Component {
+class NewExercise extends React.Component {
 
   render () {
     return (
       <ScrollView style={styles.container}>
         <KeyboardAvoidingView behavior='position'>
-          <Text>TrainingsList Screen</Text>
-          <Button
-            onPress={() => this.props.navigation.navigate('NewTrainingsScreen')}
-            title="New training"
-          />
+          <Text>NewExercise Screen</Text>
         </KeyboardAvoidingView>
       </ScrollView>
     )
@@ -35,4 +31,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TrainingsList)
+export default connect(mapStateToProps, mapDispatchToProps)(NewExercise)
