@@ -1,8 +1,12 @@
 import React, { PropTypes } from 'react'
 import { ScrollView, Text, KeyboardAvoidingView, TextInput, Button } from 'react-native'
 import { connect } from 'react-redux'
+import { pathOr } from 'ramda'
+
 import TrainingFormAction from '../Redux/TrainingFormRedux'
-import { pathOr, propOr} from 'ramda'
+import TrainingsAction from '../Redux/TrainingsRedux'
+
+import NewExercise from '../Components/NewExercise'
 
 // import NewExerciseScreen from 'NewExerciseScreen'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
@@ -14,30 +18,35 @@ import styles from './Styles/NewTrainingScreenStyle'
 class NewTraining extends React.Component {
   static propTypes = {
     dispatch: PropTypes.func,
-    createNewTraining: PropTypes.func,
-    trainingForm: PropTypes.object
+    trainingForm: PropTypes.object,
+    updateTrainingName: PropTypes.func,
+    createNewTraining: PropTypes.func
   }
 
   componentWillMount () {
-    this.props.createNewTraining()
   }
 
   render () {
     return (
       <ScrollView style={styles.container}>
-        <KeyboardAvoidingView behavior='position'>
+        <KeyboardAvoidingView behavior='padding'>
           <Text>New training name</Text>
           <TextInput
             style={{height: 40, borderColor: 'gray', borderWidth: 1}}
             onChangeText={this.props.updateTrainingName}
             value={this.props.trainingForm.trainingName}
           />
+          {
+            this.props.trainingForm.exercises.map((exerciseModel, index) => (
+              <NewExercise id={index} exerciseModel={exerciseModel} key={index.toString()}/>
+            ))
+          }
           <Button
-            onPress={() => console.log('add next exercise')}
+            onPress={this.props.addExercise}
             title="add next exercise"
           />
           <Button
-            onPress={() => console.log('Save')}
+            onPress={() => this.props.createNewTraining(this.props.trainingForm)}
             title="Save"
           />
         </KeyboardAvoidingView>
@@ -49,14 +58,15 @@ class NewTraining extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    trainingForm: pathOr(['trainingForm', 'model'], {}, state)
+    trainingForm: pathOr({}, ['trainingForm', 'model'], state)
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    createNewTraining: () => dispatch(TrainingFormAction.createNewTraining()),
-    updateTrainingName: (trainingName) => dispatch(TrainingFormAction.updateTrainingName({trainingName}))
+    updateTrainingName: (trainingName) => dispatch(TrainingFormAction.updateTrainingName({trainingName})),
+    createNewTraining: (newTrainingObject) => dispatch(TrainingsAction.addNewTraining({newTrainingObject})),
+    addExercise: () => dispatch(TrainingFormAction.addExercise()),
   }
 }
 

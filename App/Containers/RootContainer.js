@@ -7,6 +7,7 @@ import ReduxPersist from '../Config/ReduxPersist'
 
 // Styles
 import styles from './Styles/RootContainerStyles'
+import { addNavigationHelpers } from 'react-navigation'
 
 class RootContainer extends Component {
 
@@ -21,7 +22,12 @@ class RootContainer extends Component {
     return (
       <View style={styles.applicationView}>
         <StatusBar />
-        <Navigation />
+        <Navigation
+          navigation={addNavigationHelpers({
+            dispatch: this.props.dispatch,
+            state: this.props.nav,
+          })}
+        />
       </View>
     )
   }
@@ -29,7 +35,12 @@ class RootContainer extends Component {
 
 // wraps dispatch to create nicer functions to call within our component
 const mapDispatchToProps = (dispatch) => ({
+  dispatch: dispatch,
   startup: () => dispatch(StartupActions.startup())
 })
 
-export default connect(null, mapDispatchToProps)(RootContainer)
+const mapStateToProps = (state) => ({
+  nav: state.nav
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(RootContainer)

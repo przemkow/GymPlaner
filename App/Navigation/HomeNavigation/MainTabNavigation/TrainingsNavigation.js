@@ -24,7 +24,7 @@ const TrainingsNavigation = StackNavigator({
   NewTrainingsScreen: {
     screen: NewTraining,
     navigationOptions: {
-      title: 'New trainings'
+      title: 'New training'
     }
   }
 }, {
