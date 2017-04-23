@@ -1,12 +1,14 @@
 import React, { PropTypes } from 'react'
-import { ScrollView, Text } from 'react-native'
+import { Button, ScrollView, Text } from 'react-native'
 import { connect } from 'react-redux'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
 
+import TrainingInProgressFromRedux from '../Redux/TrainingInProgressFromRedux'
+
 // Styles
 import styles from './Styles/TrainingInProgressStyle'
-import { pipe, propOr, find} from 'ramda'
+import { propOr } from 'ramda'
 
 class TrainingInProgress extends React.Component {
   static propTypes = {
@@ -14,6 +16,7 @@ class TrainingInProgress extends React.Component {
   }
 
   render () {
+    console.log(this.props.training)
     return (
       <ScrollView style={styles.container}>
         <Text>{this.props.training.trainingName}</Text>
@@ -22,14 +25,9 @@ class TrainingInProgress extends React.Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
-  const trainingId = ownProps.navigation.state.params.trainingId
+const mapStateToProps = (state) => {
   return {
-    training: pipe(
-      propOr([], 'trainings'),
-      find((training) => (training.key.id === trainingId)),
-      propOr({}, 'model')
-    )(state)
+    training: propOr({}, 'trainingInProgressForm', state)
   }
 }
 

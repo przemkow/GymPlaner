@@ -3,6 +3,7 @@ import { ScrollView, Text, KeyboardAvoidingView, Button, Alert} from 'react-nati
 import { connect } from 'react-redux'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
+import TrainingInProgressFromRedux from '../Redux/TrainingInProgressFromRedux'
 
 // Styles
 import styles from './Styles/CurrentTrainingScreenStyle'
@@ -18,7 +19,7 @@ class CurrentTraining extends React.Component {
       const availableTrainings = this.props.trainings.map((training) => (
         {
           text: training.model.trainingName,
-          onPress: () => this.props.navigation.navigate('TrainingInProgressScreen', {trainingId: training.key.id})
+          onPress: () => this.props.startNewTraining(training.key.id)
         }
       ))
       return availableTrainings.length
@@ -57,6 +58,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    startNewTraining: (trainingId) => dispatch(TrainingInProgressFromRedux.startNewTraining({trainingId})),
   }
 }
 
