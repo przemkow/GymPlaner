@@ -2,6 +2,7 @@ import React from 'react'
 import { StackNavigator } from 'react-navigation'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import CurrentTraining from '../../../Containers/CurrentTrainingScreen'
+import TrainingInProgress from '../../../Containers/TrainingInProgress'
 
 // Manifest of possible screens
 const CurrentTrainingNavigation = StackNavigator({
@@ -18,6 +19,12 @@ const CurrentTrainingNavigation = StackNavigator({
           />
         )
       })
+    }
+  },
+  TrainingInProgressScreen: {
+    screen: TrainingInProgress,
+    navigationOptions: {
+      title: 'Training in progress'
     }
   }
 }, {

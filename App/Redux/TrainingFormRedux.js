@@ -17,6 +17,12 @@ export const TrainingFormTypes = Types
 export default Creators
 
 /* ------------- Initial State ------------- */
+export const newExerciseModel = {
+  exerciseName: null,
+  breakTime: 90,
+  sets: 5,
+  reps: 5
+}
 
 export const INITIAL_STATE = {
   key: {
@@ -24,17 +30,12 @@ export const INITIAL_STATE = {
   },
   model: {
     trainingName: null,
-    exercises: []
+    exercises: [newExerciseModel]
   },
   identity: 'trainingForm'
 }
 
-export const newExerciseModel = {
-  exerciseName: null,
-  breakTime: 90,
-  sets: 5,
-  reps: 5
-}
+
 /* ------------- Reducers ------------- */
 
 // set up data for new training form
