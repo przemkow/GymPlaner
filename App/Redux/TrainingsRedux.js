@@ -12,22 +12,7 @@ export default Creators
 
 /* ------------- Initial State ------------- */
 
-export const INITIAL_STATE = [{
-  key: {
-    id: guid()
-  },
-  model: {
-    trainingName: 'Test Training',
-    exercises: [
-      {
-        exerciseName: 'Test Exercise',
-        breakTime: 90,
-        sets: 5,
-        reps: 5
-      }
-    ]
-  }
-}]
+export const INITIAL_STATE = []
 
 /* ------------- Reducers ------------- */
 
