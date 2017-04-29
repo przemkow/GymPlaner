@@ -1,10 +1,7 @@
 import React, { PropTypes } from 'react'
-import { Button, ScrollView, Text } from 'react-native'
+import { ScrollView, Text } from 'react-native'
 import { connect } from 'react-redux'
-// Add Actions - replace 'Your' with whatever your reducer is called :)
-// import YourActions from '../Redux/YourRedux'
-
-import TrainingInProgressFromRedux from '../Redux/TrainingInProgressFromRedux'
+import CurrentTrainingExercise from '../Components/CurrentTrainingExercise'
 
 // Styles
 import styles from './Styles/TrainingInProgressStyle'
@@ -20,6 +17,12 @@ class TrainingInProgress extends React.Component {
     return (
       <ScrollView style={styles.container}>
         <Text>{this.props.training.trainingName}</Text>
+        {
+          this.props.training.exercises.map((exercise, index) => (
+            <CurrentTrainingExercise exercise={exercise} id={index} key={index.toString()}/>
+          ))
+        }
+
       </ScrollView>
     )
   }

@@ -25,6 +25,7 @@
     "postinstall": "remotedev-debugger --hostname=localhost --port=8000 --injectserver=reactnative"
   },
   "dependencies": {
+    "@shoutem/ui": "^0.13.0",
     "apisauce": "^0.10.0",
     "format-json": "^1.0.3",
     "lodash": "^4.17.2",

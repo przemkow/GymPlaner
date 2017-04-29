@@ -1,10 +1,10 @@
 import React, {PropTypes} from 'react'
-import { ScrollView, Text, KeyboardAvoidingView, Button } from 'react-native'
+import { ScrollView, KeyboardAvoidingView } from 'react-native'
 import { connect } from 'react-redux'
 import { propOr } from 'ramda'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
-
+import { Button, Text, Heading} from '@shoutem/ui'
 // Styles
 import styles from './Styles/TrainingsListScreenStyle'
 
@@ -18,7 +18,7 @@ class TrainingsList extends React.Component {
     return (
       <ScrollView style={styles.container}>
         <KeyboardAvoidingView behavior='position'>
-          <Text>TrainingsList Screen</Text>
+          <Heading>TrainingsList Screen</Heading>
 
           {
             this.props.trainings.map((training, index) => {
@@ -28,9 +28,10 @@ class TrainingsList extends React.Component {
             })
           }
           <Button
-            onPress={() => this.props.navigation.navigate('NewTrainingsScreen')}
-            title="New training"
-          />
+              styleName="secondary"
+              onPress={() => this.props.navigation.navigate('NewTrainingsScreen')}>
+            <Text>NEW TRAINING</Text>
+          </Button>
         </KeyboardAvoidingView>
       </ScrollView>
     )

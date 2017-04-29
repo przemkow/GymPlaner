@@ -8,6 +8,7 @@ const { Types, Creators } = createActions({
   updateBreakTime: ['payload'],
   updateSets: ['payload'],
   updateReps: ['payload'],
+  updateWeight: ['payload'],
   addExercise: null,
   deleteExercise: ['payload'],
   clearForm: null
@@ -20,6 +21,7 @@ export default Creators
 export const newExerciseModel = {
   exerciseName: null,
   breakTime: 90,
+  weight: 40,
   sets: 5,
   reps: 5
 }
@@ -76,5 +78,6 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.UPDATE_BREAK_TIME]: updateExerciseAttribute('breakTime'),
   [Types.UPDATE_SETS]: updateExerciseAttribute('sets'),
   [Types.UPDATE_REPS]: updateExerciseAttribute('reps'),
+  [Types.UPDATE_WEIGHT]: updateExerciseAttribute('weight'),
   [Types.CLEAR_FORM]: clearForm
 })

@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react'
-import { ScrollView, Text, KeyboardAvoidingView, TextInput, Button } from 'react-native'
+import { ScrollView, KeyboardAvoidingView } from 'react-native'
 import { connect } from 'react-redux'
 import { pathOr } from 'ramda'
+import { Button, View, Text, TextInput, Caption, FormGroup, Divider} from '@shoutem/ui'
 
 import TrainingFormAction from '../Redux/TrainingFormRedux'
 import TrainingsAction from '../Redux/TrainingsRedux'
@@ -28,25 +29,35 @@ class NewTraining extends React.Component {
 
   render () {
     return (
-      <ScrollView style={styles.container}>
+      <ScrollView>
         <KeyboardAvoidingView behavior='padding'>
-          <Text>New training name</Text>
-          <TextInput
-            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-            onChangeText={this.props.updateTrainingName}
-            value={this.props.trainingForm.trainingName}
-          />
+          <FormGroup styleName="stretch">
+            <Caption>New training name:</Caption>
+            <TextInput
+              onChangeText={this.props.updateTrainingName}
+              value={this.props.trainingForm.trainingName}
+            />
+          </FormGroup>
+
+
           {
             this.props.trainingForm.exercises.map((exerciseModel, index) => (
               <NewExercise id={index} exerciseModel={exerciseModel} key={index.toString()}/>
             ))
           }
+
+          <Divider styleName="section-header" />
           <Button
-            onPress={this.props.addExercise}
-            title="add next exercise"
-          />
+              onPress={this.props.addExercise}>
+            <Text>Add next exercise</Text>
+          </Button>
+          <Divider styleName="line" />
           <Button
-            onPress={() => this.props.createNewTraining(this.props.trainingForm)}
+            styleName="secondary"
+            onPress={() => this.props.createNewTraining(this.props.trainingForm)}>
+            <Text>SAVE</Text>
+          </Button>
+          <Button
             title="Save"
           />
         </KeyboardAvoidingView>

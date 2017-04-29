@@ -1,8 +1,9 @@
 import React, {PropTypes} from 'react'
-import { View, Text, TextInput, Button} from 'react-native'
 import styles from './Styles/NewExerciseStyle'
 import { connect } from 'react-redux'
 import TrainingFormAction from '../Redux/TrainingFormRedux'
+import { Button, View, Text, TextInput, Caption, FormGroup, Divider } from '@shoutem/ui'
+import NumberSelector from './NumberSelector'
 
 export class NewExercise extends React.Component {
 
@@ -14,34 +15,51 @@ export class NewExercise extends React.Component {
   render () {
     return (
       <View style={styles.container}>
-        <Text>Exercise name:</Text>
-        <TextInput
-          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-          onChangeText={(newValue) => this.props.updateExerciseName(this.props.id, newValue)}
-          value={this.props.exerciseModel.exerciseName}
-        />
-        <Text>Break time (in sec):</Text>
-        <TextInput
-          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-          onChangeText={(newValue) => this.props.updateBreakTime(this.props.id, parseInt(newValue))}
-          value={this.props.exerciseModel.breakTime.toString()}
-        />
-        <Text>Sets:</Text>
-        <TextInput
-          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-          onChangeText={(newValue) => this.props.updateSets(this.props.id, parseInt(newValue))}
-          value={this.props.exerciseModel.sets.toString()}
-        />
-        <Text>reps:</Text>
-        <TextInput
-          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-          onChangeText={(newValue) => this.props.updateReps(this.props.id, parseInt(newValue))}
-          value={this.props.exerciseModel.reps.toString()}
-        />
-        <Button
-          onPress={() => this.props.deleteExercise(this.props.id)}
-          title="Delete Exercise"
-        />
+        <Divider styleName="section-header">
+          <Caption>EXERCISE INFORMATION:</Caption>
+        </Divider>
+        <FormGroup styleName="stretch">
+          <Caption>Exercise name:</Caption>
+          <TextInput
+            value={this.props.exerciseModel.exerciseName}
+            onChangeText={(newValue) => this.props.updateExerciseName(this.props.id, newValue)}
+          />
+        </FormGroup>
+        <FormGroup styleName="stretch">
+          <Caption>Starting weight:</Caption>
+          <NumberSelector
+            value={this.props.exerciseModel.weight}
+            onChange={(newValue) => this.props.updateWeight(this.props.id, newValue)}
+            allowFloats={true}
+          />
+        </FormGroup>
+        <FormGroup styleName="stretch">
+          <Caption>Break time (in sec):</Caption>
+          <NumberSelector
+            value={this.props.exerciseModel.breakTime}
+            onChange={(newValue) => this.props.updateBreakTime(this.props.id, newValue)}
+            allowFloats={false}
+          />
+        </FormGroup>
+        <FormGroup styleName="stretch">
+          <Caption>Sets:</Caption>
+          <NumberSelector
+            value={this.props.exerciseModel.sets}
+            onChange={(newValue) => this.props.updateSets(this.props.id, newValue)}
+            allowFloats={false}
+          />
+        </FormGroup>
+        <FormGroup styleName="stretch">
+          <Caption>Reps:</Caption>
+          <NumberSelector
+            value={this.props.exerciseModel.reps}
+            onChange={(newValue) => this.props.updateReps(this.props.id, newValue)}
+            allowFloats={false}
+          />
+        </FormGroup>
+        <Button styleName="secondary" onPress={() => this.props.deleteExercise(this.props.id)}>
+          <Text>Delete Exercise</Text>
+        </Button>
       </View>
     )
   }
@@ -62,6 +80,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(TrainingFormAction.updateSets({id, newValue})),
     updateReps: (id, newValue) =>
       dispatch(TrainingFormAction.updateReps({id, newValue})),
+    updateWeight: (id, newValue) =>
+      dispatch(TrainingFormAction.updateWeight({id, newValue})),
     deleteExercise: (id) =>
       dispatch(TrainingFormAction.deleteExercise({id}))
   }

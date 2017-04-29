@@ -3,6 +3,8 @@
 
 * Standard compliant React Native App Utilizing [Ignite](https://github.com/infinitered/ignite)
 
+* Shouten UI as main interface framework
+ http://shoutem.github.io/docs/ui-toolkit
 ## :arrow_up: How to Setup
 
 **Step 1:** git clone this repo:
