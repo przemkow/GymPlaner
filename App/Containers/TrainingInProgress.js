@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react'
-import { ScrollView, Text } from 'react-native'
+import { ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 import CurrentTrainingExercise from '../Components/CurrentTrainingExercise'
+import { View, Text, Button, Divider, Caption, Title} from '@shoutem/ui'
 
 // Styles
 import styles from './Styles/TrainingInProgressStyle'
@@ -13,10 +14,9 @@ class TrainingInProgress extends React.Component {
   }
 
   render () {
-    console.log(this.props.training)
     return (
       <ScrollView style={styles.container}>
-        <Text>{this.props.training.trainingName}</Text>
+        <Title style={{textAlign: 'center'}}>{this.props.training.trainingName.toUpperCase()}</Title>
         {
           this.props.training.exercises.map((exercise, index) => (
             <CurrentTrainingExercise exercise={exercise} id={index} key={index.toString()}/>

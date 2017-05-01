@@ -4868,6 +4868,12 @@ react-dom@^15.4.0:
     object-assign "^4.1.0"
     prop-types "~15.5.7"
 
+react-native-accordion@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-accordion/-/react-native-accordion-1.0.1.tgz#1086ac012b9d7c90cd1efd014f2804baa16a1f5b"
+  dependencies:
+    react-tween-state "0.0.5"
+
 react-native-config@^0.2.1:
   version "0.2.5"
   resolved "https://registry.yarnpkg.com/react-native-config/-/react-native-config-0.2.5.tgz#1d804b77de381a02aa35974c95e1bec0c8286485"
@@ -4904,7 +4910,7 @@ react-native-gesture-responder@0.1.1:
   dependencies:
     react-timer-mixin "^0.13.3"
 
-"react-native-lightbox@github:shoutem/react-native-lightbox#4e58b9b1aca166142d69b161ff511efc3358ff9f":
+react-native-lightbox@shoutem/react-native-lightbox#4e58b9b1aca166142d69b161ff511efc3358ff9f:
   version "0.7.0"
   resolved "https://codeload.github.com/shoutem/react-native-lightbox/tar.gz/4e58b9b1aca166142d69b161ff511efc3358ff9f"
   dependencies:
@@ -4948,7 +4954,7 @@ react-native-tab-view@^0.0.57:
   version "0.0.57"
   resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-0.0.57.tgz#715e2ea4100fa50168e134df3947dd76ebd55743"
 
-"react-native-transformable-image@github:shoutem/react-native-transformable-image#7d15395ec3857571711a12bc08f24f3a96ff1cde":
+react-native-transformable-image@shoutem/react-native-transformable-image#7d15395ec3857571711a12bc08f24f3a96ff1cde:
   version "0.0.19"
   resolved "https://codeload.github.com/shoutem/react-native-transformable-image/tar.gz/7d15395ec3857571711a12bc08f24f3a96ff1cde"
   dependencies:
@@ -5088,6 +5094,12 @@ react-transform-hmr@^1.0.4:
   dependencies:
     global "^4.3.0"
     react-proxy "^1.1.7"
+
+react-tween-state@0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/react-tween-state/-/react-tween-state-0.0.5.tgz#bd25c27f2558b839a6c7aee3b85fab967760d1d2"
+  dependencies:
+    tween-functions "^1.0.1"
 
 react@~15.4.1:
   version "15.4.2"
