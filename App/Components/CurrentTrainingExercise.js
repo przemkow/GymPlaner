@@ -2,14 +2,16 @@ import React, {PropTypes} from 'react'
 import styles from './Styles/CurrentTrainingExerciseStyle'
 import { connect } from 'react-redux'
 import TrainingInProgressFromRedux from '../Redux/TrainingInProgressFromRedux'
-import { View, Text, Button, Divider, Caption} from '@shoutem/ui'
+import { View, Text, Button, Divider, Caption, Row} from '@shoutem/ui'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import Accordion from 'react-native-accordion'
+import Timer from './Timer'
 
 export class CurrentTrainingExercise extends React.Component {
   static propTypes = {
     id: PropTypes.number,
-    exercise: PropTypes.object
+    exercise: PropTypes.object,
+    isCurrent: PropTypes.bool
   }
 
   render () {
@@ -35,6 +37,9 @@ export class CurrentTrainingExercise extends React.Component {
           ))
         }
         </View>
+        <Divider styleName="line" />
+        <Timer breakTime={this.props.exercise.breakTime} visible={this.props.isCurrent}/>
+
       </View>
     )
   }

@@ -13,6 +13,7 @@
 import { call, put, select } from 'redux-saga/effects'
 import { NavigationActions } from 'react-navigation'
 import TrainingInProgressFromRedux from '../Redux/TrainingInProgressFromRedux'
+import TimerRedux from '../Redux/TimerRedux'
 import { pipe, propOr, find } from 'ramda'
 
 export function * startNewTraining ({payload}) {
@@ -23,4 +24,9 @@ export function * startNewTraining ({payload}) {
   )(state)
   yield put(TrainingInProgressFromRedux.prepareTrainingForm({selectedTraining}))
   yield put(NavigationActions.navigate({routeName: 'TrainingInProgressScreen'}))
+}
+
+export function * updateFinishedSet () {
+  yield put(TimerRedux.reset())
+  yield put(TimerRedux.start())
 }

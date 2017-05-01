@@ -5,7 +5,7 @@ import AppNavigator from '../Navigation/AppNavigation'
 
 const navReducer = (state, action) => {
   const newState = AppNavigator.router.getStateForAction(action, state);
-  return (newState ? newState : state)
+  return (newState || state)
 };
 
 export default () => {
@@ -15,7 +15,8 @@ export default () => {
     login: require('./LoginRedux').reducer,
     trainingForm: require('./TrainingFormRedux').reducer,
     trainings: require('./TrainingsRedux').reducer,
-    trainingInProgressForm: require('./TrainingInProgressFromRedux').reducer
+    trainingInProgressForm: require('./TrainingInProgressFromRedux').reducer,
+    timer: require('./TimerRedux').reducer
   })
 
   return configureStore(rootReducer, rootSaga)

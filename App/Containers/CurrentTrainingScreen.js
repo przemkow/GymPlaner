@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
 import TrainingInProgressFromRedux from '../Redux/TrainingInProgressFromRedux'
-
 // Styles
 import styles from './Styles/CurrentTrainingScreenStyle'
 import { propOr } from 'ramda'

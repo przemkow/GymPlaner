@@ -9,12 +9,14 @@ import { StartupTypes } from '../Redux/StartupRedux'
 import { LoginTypes } from '../Redux/LoginRedux'
 import { TrainingsTypes } from '../Redux/TrainingsRedux'
 import { TrainingInProgressFromTypes } from '../Redux/TrainingInProgressFromRedux'
+import { TimerTypes } from '../Redux/TimerRedux'
 /* ------------- Sagas ------------- */
 
 import { startup } from './StartupSagas'
 import { login } from './LoginSagas'
 import { addNewTraining } from './TrainingsSagas'
-import { startNewTraining } from './TrainingInProgressFormSagas'
+import { startNewTraining, updateFinishedSet } from './TrainingInProgressFormSagas'
+import { timerTick } from './TimerSagas'
 /* ------------- API ------------- */
 
 // The API we use is only used from Sagas, so we create it here and pass along
@@ -29,6 +31,8 @@ export default function * root () {
     takeLatest(StartupTypes.STARTUP, startup),
     takeLatest(LoginTypes.LOGIN_REQUEST, login),
     takeLatest(TrainingsTypes.ADD_NEW_TRAINING, addNewTraining),
-    takeLatest(TrainingInProgressFromTypes.START_NEW_TRAINING, startNewTraining)
+    takeLatest(TrainingInProgressFromTypes.START_NEW_TRAINING, startNewTraining),
+    takeLatest(TrainingInProgressFromTypes.UPDATE_FINISHED_SET, updateFinishedSet),
+    takeLatest(TimerTypes.START, timerTick)
   ]
 }

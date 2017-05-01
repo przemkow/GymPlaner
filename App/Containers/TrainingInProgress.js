@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import { ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 import CurrentTrainingExercise from '../Components/CurrentTrainingExercise'
-import { View, Text, Button, Divider, Caption, Title} from '@shoutem/ui'
+import { View, Text, Button, Divider, Caption, Title, } from '@shoutem/ui'
 
 // Styles
 import styles from './Styles/TrainingInProgressStyle'
@@ -19,7 +19,8 @@ class TrainingInProgress extends React.Component {
         <Title style={{textAlign: 'center'}}>{this.props.training.trainingName.toUpperCase()}</Title>
         {
           this.props.training.exercises.map((exercise, index) => (
-            <CurrentTrainingExercise exercise={exercise} id={index} key={index.toString()}/>
+            <CurrentTrainingExercise exercise={exercise} id={index}
+              isCurrent={index === this.props.training.currentExercise} key={index.toString()}/>
           ))
         }
 

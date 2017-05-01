@@ -21,7 +21,23 @@ const colors = {
   eggplant: '#251a34',
   border: '#483F53',
   banner: '#5F3E63',
-  text: '#E0D7E5'
+  text: '#E0D7E5',
+
+  redLighter2: '#FF8787',
+  redLighter1: '#FC5D5D',
+  red: '#e73536',
+  redDarker1: '#C51414',
+  redDarker2: '#9C0303',
+  turquoiseLighter2: '#61B8B8',
+  turquoiseLighter1: '#389797',
+  turquoise: '#208B8B',
+  turquoiseDarker1: '#0C7676',
+  turquoiseDarker2: '#025E5E',
+  greenLighter2: '#CDF380',
+  greenLighter1: '#B9EB56',
+  green: '#A0D831',
+  greenDarker1: '#81B813',
+  greenDarker2: '#629203'
 }
 
 export default colors
