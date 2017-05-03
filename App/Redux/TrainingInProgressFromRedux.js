@@ -1,5 +1,5 @@
 import { createReducer, createActions } from 'reduxsauce'
-import { adjust, evolve, clone } from 'ramda'
+import { adjust, evolve, clone, always } from 'ramda'
 
 /* ------------- Types and Action Creators ------------- */
 
@@ -59,9 +59,9 @@ export const updateFinishedSet = (state, { payload }) => {
     return updatedExercise
   }
   const finishRepEvolve = {
-    exercises: adjust(updateExercise, exerciseId)
+    exercises: adjust(updateExercise, exerciseId),
+    currentExercise: always(exerciseId)
   }
-
   return evolve(finishRepEvolve, state)
 }
 
