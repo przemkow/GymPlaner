@@ -14,7 +14,7 @@ import { TimerTypes } from '../Redux/TimerRedux'
 
 import { startup } from './StartupSagas'
 import { login } from './LoginSagas'
-import { addNewTraining } from './TrainingsSagas'
+import { clearFormAndGoBack, editTraining, newTraining} from './TrainingsSagas'
 import { startNewTraining, updateFinishedSet } from './TrainingInProgressFormSagas'
 import { timerTick } from './TimerSagas'
 /* ------------- API ------------- */
@@ -30,7 +30,10 @@ export default function * root () {
     // some sagas only receive an action
     takeLatest(StartupTypes.STARTUP, startup),
     takeLatest(LoginTypes.LOGIN_REQUEST, login),
-    takeLatest(TrainingsTypes.ADD_NEW_TRAINING, addNewTraining),
+    takeLatest(TrainingsTypes.ADD_NEW_TRAINING, clearFormAndGoBack),
+    takeLatest(TrainingsTypes.UPDATE_TRAINING, clearFormAndGoBack),
+    takeLatest(TrainingsTypes.EDIT_TRAINING, editTraining),
+    takeLatest(TrainingsTypes.NEW_TRAINING, newTraining),
     takeLatest(TrainingInProgressFromTypes.START_NEW_TRAINING, startNewTraining),
     takeLatest(TrainingInProgressFromTypes.UPDATE_FINISHED_SET, updateFinishedSet),
     takeLatest(TimerTypes.START, timerTick)

@@ -1,39 +1,52 @@
 import React, {PropTypes} from 'react'
-import { ScrollView, KeyboardAvoidingView } from 'react-native'
+import { KeyboardAvoidingView, ListView, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import { propOr } from 'ramda'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
-import { Button, Text, Heading} from '@shoutem/ui'
+import { Button, Text ,Row, View, Icon, Divider } from '@shoutem/ui'
+import TrainingsAction from '../Redux/TrainingsRedux'
+
 // Styles
 import styles from './Styles/TrainingsListScreenStyle'
 
 class TrainingsList extends React.Component {
   static propTypes = {
     dispatch: PropTypes.func,
-    trainings: PropTypes.array
+    trainings: PropTypes.array,
+    editTraining: PropTypes.func,
   }
 
   render () {
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    const trainingsDS = ds.cloneWithRows(this.props.trainings)
     return (
-      <ScrollView style={styles.container}>
+      <View style={styles.container}>
         <KeyboardAvoidingView behavior='position'>
-          <Heading>TrainingsList Screen</Heading>
+          <ListView
+            dataSource={trainingsDS}
+            scrollEnabled={false}
+            renderRow={ training => (
+              <Row styleName="small">
+                <Text>{training.model.trainingName}</Text>
+                <TouchableOpacity
+                  onPress={() => this.props.editTraining(training.key.id)}>
+                  <Icon styleName="disclosure" name="edit" />
+                </TouchableOpacity>
+              </Row>
+            )
+            }
+            renderSeparator={(_, rowId) => <Divider key={rowId} styleName="line" />}
+            enableEmptySections={true}
+          />
 
-          {
-            this.props.trainings.map((training, index) => {
-              return (
-                <Text key={index.toString()}>TrainingsList {index}</Text>
-              )
-            })
-          }
           <Button
-              styleName="secondary"
-              onPress={() => this.props.navigation.navigate('NewTrainingsScreen')}>
+            styleName="secondary"
+            onPress={() => this.props.newTraining()}>
             <Text>NEW TRAINING</Text>
           </Button>
         </KeyboardAvoidingView>
-      </ScrollView>
+      </View>
     )
   }
 
@@ -47,6 +60,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    editTraining: (trainingUUID) => dispatch(TrainingsAction.editTraining({trainingUUID})),
+    newTraining: () => dispatch(TrainingsAction.newTraining())
   }
 }
 

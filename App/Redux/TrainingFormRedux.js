@@ -11,7 +11,8 @@ const { Types, Creators } = createActions({
   updateWeight: ['payload'],
   addExercise: null,
   deleteExercise: ['payload'],
-  clearForm: null
+  clearForm: null,
+  setForm: ['payload']
 })
 
 export const TrainingFormTypes = Types
@@ -36,7 +37,6 @@ export const INITIAL_STATE = {
   },
   identity: 'trainingForm'
 }
-
 
 /* ------------- Reducers ------------- */
 
@@ -69,6 +69,8 @@ export const updateExerciseAttribute = (attribute) => (state, { payload }) => {
 
 export const clearForm = () => INITIAL_STATE
 
+export const setForm = (state, { payload }) => payload.trainingToEdit
+
 /* ------------- Hookup Reducers To Types ------------- */
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.UPDATE_TRAINING_NAME]: updateTrainingName,
@@ -79,5 +81,6 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.UPDATE_SETS]: updateExerciseAttribute('sets'),
   [Types.UPDATE_REPS]: updateExerciseAttribute('reps'),
   [Types.UPDATE_WEIGHT]: updateExerciseAttribute('weight'),
-  [Types.CLEAR_FORM]: clearForm
+  [Types.CLEAR_FORM]: clearForm,
+  [Types.SET_FORM]: setForm
 })

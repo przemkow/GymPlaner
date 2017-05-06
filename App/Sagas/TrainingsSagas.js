@@ -10,13 +10,28 @@
 *    you'll need to define a constant in that file.
 *************************************************************/
 
-import { call, put } from 'redux-saga/effects'
+import { call, put, select } from 'redux-saga/effects'
 import TrainingsActions from '../Redux/TrainingsRedux'
 import { NavigationActions } from 'react-navigation'
-import  TrainingFormActions from '../Redux/TrainingFormRedux'
+import TrainingFormActions from '../Redux/TrainingFormRedux'
+import { pipe, propOr, find } from 'ramda'
 
-export function * addNewTraining (action) {
-  yield put(NavigationActions.back());
-  yield put(TrainingFormActions.clearForm());
+export function * clearFormAndGoBack (action) {
+  yield put(NavigationActions.back())
+  yield put(TrainingFormActions.clearForm())
 }
 
+export function * editTraining ({payload}) {
+  const state = yield select()
+  const trainingToEdit = pipe(
+    propOr([], 'trainings'),
+    find((training) => (training.key.id === payload.trainingUUID)),
+  )(state)
+  yield put(TrainingFormActions.setForm({trainingToEdit}))
+  yield put(NavigationActions.navigate({routeName: 'EditTrainingScreen'}))
+}
+
+export function * newTraining () {
+  yield put(TrainingFormActions.clearForm())
+  yield put(NavigationActions.navigate({routeName: 'NewTrainingScreen'}))
+}

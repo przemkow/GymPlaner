@@ -3,6 +3,7 @@ import { StackNavigator } from 'react-navigation'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import TrainingsList from '../../../Containers/TrainingsListScreen'
 import NewTraining from '../../../Containers/NewTrainingScreen'
+import EditTraining from '../../../Containers/EditTrainingScreen'
 
 // Manifest of possible screens
 const TrainingsNavigation = StackNavigator({
@@ -21,10 +22,16 @@ const TrainingsNavigation = StackNavigator({
       })
     }
   },
-  NewTrainingsScreen: {
+  NewTrainingScreen: {
     screen: NewTraining,
     navigationOptions: {
       title: 'New training'
+    }
+  },
+  EditTrainingScreen: {
+    screen: EditTraining,
+    navigationOptions: {
+      title: 'Edit training'
     }
   }
 }, {
