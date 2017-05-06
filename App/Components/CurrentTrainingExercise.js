@@ -1,12 +1,13 @@
 import React, {PropTypes} from 'react'
 import styles, { shoutemOverwrite } from './Styles/CurrentTrainingExerciseStyle'
-import { View, Animated } from 'react-native'
+import { View, Animated, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import TrainingInProgressFromRedux from '../Redux/TrainingInProgressFromRedux'
-import { View as ViewSH, Text, Button, Divider, Caption, Row} from '@shoutem/ui'
+import { View as ViewSH, Text, TextInput, Button, Divider, Caption, Row, FormGroup} from '@shoutem/ui'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import Accordion from 'react-native-accordion'
 import Timer from './Timer'
+import NumberSelector from './NumberSelector'
 
 export class CurrentTrainingExercise extends React.Component {
   static propTypes = {
@@ -17,6 +18,13 @@ export class CurrentTrainingExercise extends React.Component {
 
   componentWillMount () {
     this.borderWidth = new Animated.Value(0);
+  }
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      editVisible: false
+    }
   }
 
   animationsHandler () {
@@ -44,9 +52,46 @@ export class CurrentTrainingExercise extends React.Component {
       <View style={{marginTop: 10}}>
         <Animated.View style={viewContainerStyles}>
           <Divider styleName="section-header">
-            <Caption>{this.props.exercise.exerciseName}</Caption>
-            <Caption>{this.props.exercise.setsGoal}x{this.props.exercise.setsGoal}x{this.props.exercise.weight}kg</Caption>
+            <View>
+              <Caption>{this.props.exercise.exerciseName}</Caption>
+              <Caption>
+                {this.props.exercise.setsGoal}x{this.props.exercise.setsGoal}x{this.props.exercise.weight}kg
+              </Caption>
+            </View>
+            <TouchableOpacity
+              onPress={() => this.setState({editVisible: !this.state.editVisible})}
+            >
+              {
+                this.state.editVisible ?
+                  <MaterialCommunityIcons style={{color: '#666666', marginRight: 6, paddingTop: 4 }}
+                    name='arrow-up-drop-circle' size={24} /> :
+                  <MaterialCommunityIcons style={{color: '#666666', marginRight: 6, paddingTop: 4 }}
+                    name='arrow-down-drop-circle-outline' size={24} />
+              }
+
+            </TouchableOpacity>
           </Divider>
+          { this.state.editVisible ?
+            <ViewSH>
+              <FormGroup styleName="stretch">
+                <Caption>Update weight</Caption>
+                <NumberSelector
+                  // value={this.props.exerciseModel.breakTime}
+                  // onChange={(newValue) => this.props.updateBreakTime(this.props.id, newValue)}
+                  // allowFloats={false}
+                />
+              </FormGroup>
+              <FormGroup styleName="stretch">
+                <Caption>Exercise notes:</Caption>
+                <TextInput
+                  // onChangeText={this.props.updateTrainingName}
+                  // value={this.props.trainingForm.trainingName}
+                />
+              </FormGroup>
+              <Divider styleName="line" />
+            </ViewSH> :
+            null
+          }
           <ViewSH styleName="horizontal flexible">
           {
             this.props.exercise.setsDone.map((setDone, index) => (

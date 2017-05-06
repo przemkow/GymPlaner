@@ -1,16 +1,18 @@
 import React, { PropTypes } from 'react'
-import { ScrollView, Text, KeyboardAvoidingView, Button, Alert} from 'react-native'
+import { KeyboardAvoidingView, Alert} from 'react-native'
 import { connect } from 'react-redux'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
 import TrainingInProgressFromRedux from '../Redux/TrainingInProgressFromRedux'
+import { Button, Text ,Row, View, Icon, Divider } from '@shoutem/ui'
 // Styles
 import styles from './Styles/CurrentTrainingScreenStyle'
-import { propOr } from 'ramda'
+import { pathOr, pipe, propOr, isEmpty, not } from 'ramda'
 
 class CurrentTraining extends React.Component {
   static propTypes = {
-    trainings: PropTypes.array
+    trainings: PropTypes.array,
+    hasTrainingInProgress: PropTypes.bool
   }
 
   render () {
@@ -35,15 +37,23 @@ class CurrentTraining extends React.Component {
     }
 
     return (
-      <ScrollView style={styles.container}>
+      <View style={styles.container}>
         <KeyboardAvoidingView behavior='position'>
-          <Text>CurrentTraining Screen</Text>
+          {
+            this.props.hasTrainingInProgress ?
+              <Button
+                styleName="secondary"
+                onPress={() => this.props.navigation.navigate('TrainingInProgressScreen')}>
+                <Text>CONTINUE TRAINING</Text>
+              </Button> :
+              null
+          }
           <Button
-            onPress={trainingsList}
-            title="Start training"
-          />
+              onPress={trainingsList}>
+            <Text>START NEW TRAINING</Text>
+          </Button>
         </KeyboardAvoidingView>
-      </ScrollView>
+      </View>
     )
   }
 
@@ -51,7 +61,12 @@ class CurrentTraining extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    trainings: propOr([], 'trainings', state)
+    trainings: propOr([], 'trainings', state),
+    hasTrainingInProgress: pipe(
+      pathOr('', ['trainingInProgressForm', 'trainingId']),
+      isEmpty,
+      not
+    )(state)
   }
 }
 

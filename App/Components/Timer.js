@@ -22,16 +22,8 @@ export class Timer extends React.Component {
         toValue: 80,
         duration: 500
       }).start()
-      Animated.timing(this.borderBottomWidth, {
-        toValue: 3,
-        duration: 500
-      }).start()
     } else {
       Animated.timing(this.viewHeight, {
-        toValue: 0,
-        duration: 500
-      }).start()
-      Animated.timing(this.borderBottomWidth, {
         toValue: 0,
         duration: 500
       }).start()
@@ -42,7 +34,7 @@ export class Timer extends React.Component {
     this.animationsHandler()
     const animatedView = {
       height: this.viewHeight,
-      borderBottomWidth: this.borderBottomWidth
+      borderBottomWidth: this.props.visible ? 3 : 0
     }
 
     const nextSeries = this.props.breakTime < this.props.timer.currentTime;

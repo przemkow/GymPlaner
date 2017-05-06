@@ -22,6 +22,8 @@ export function * startNewTraining ({payload}) {
     propOr([], 'trainings'),
     find((training) => (training.key.id === payload.trainingId)),
   )(state)
+  yield put(TimerRedux.stop())
+  yield put(TimerRedux.reset())
   yield put(TrainingInProgressFromRedux.prepareTrainingForm({selectedTraining}))
   yield put(NavigationActions.navigate({routeName: 'TrainingInProgressScreen'}))
 }
