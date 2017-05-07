@@ -34,7 +34,7 @@ class TrainingInProgress extends React.Component {
         </FormGroup>
         <Button
           styleName="secondary"
-          // onPress={() => this.props.navigation.navigate('TrainingInProgressScreen')}
+          onPress={() => this.props.saveTraining()}
         >
           <Text>SAVE TRAINING</Text>
         </Button>
@@ -53,6 +53,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     updateTrainingUserNote: (note) =>
       dispatch(TrainingInProgressFromRedux.updateTrainingUserNote({note})),
+    saveTraining: () => dispatch(TrainingInProgressFromRedux.saveTraining())
   }
 }
 

@@ -12,6 +12,7 @@ const { Types, Creators } = createActions({
   updateExerciseWeight: ['payload'],
   updateTrainingUserNote: ['payload'],
   nextExercise: null,
+  saveTraining: null,
 })
 
 export const TrainingInProgressFromTypes = Types
@@ -113,4 +114,5 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.UPDATE_EXERCISE_WEIGHT]: updateExerciseWeight,
   [Types.UPDATE_TRAINING_USER_NOTE]: updateTrainingUserNote,
   [Types.NEXT_EXERCISE]: nextExercise,
+  [Types.SAVE_TRAINING]: identity
 })

@@ -47,3 +47,6 @@ export function * updateFinishedSet ({payload}) {
     yield put(TimerRedux.start())
   }
 }
+
+export function * saveTraining () {
+}
