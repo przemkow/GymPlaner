@@ -18,6 +18,7 @@ export class CurrentTrainingExercise extends React.Component {
 
   componentWillMount () {
     this.borderWidth = new Animated.Value(0);
+    this.editContainerHeight = new Animated.Value(0);
   }
 
   constructor(props) {
@@ -39,6 +40,18 @@ export class CurrentTrainingExercise extends React.Component {
         duration: 500
       }).start()
     }
+
+    if (this.state.editVisible) {
+      Animated.timing(this.editContainerHeight, {
+        toValue: 500,
+        duration: 500
+      }).start()
+    } else {
+      Animated.timing(this.editContainerHeight, {
+        toValue: 0,
+        duration: 500
+      }).start()
+    }
   }
 
   render () {
@@ -48,6 +61,9 @@ export class CurrentTrainingExercise extends React.Component {
       borderBottomWidth: 0,
     }
     viewContainerStyles.borderWidth = this.borderWidth
+    let editContainer = {
+      maxHeight: this.editContainerHeight,
+    }
     return (
       <View style={{marginTop: 10}}>
         <Animated.View style={viewContainerStyles}>
@@ -76,16 +92,16 @@ export class CurrentTrainingExercise extends React.Component {
               <FormGroup styleName="stretch">
                 <Caption>Update weight</Caption>
                 <NumberSelector
-                  // value={this.props.exerciseModel.breakTime}
-                  // onChange={(newValue) => this.props.updateBreakTime(this.props.id, newValue)}
-                  // allowFloats={false}
+                  value={this.props.exercise.weight}
+                  onChange={(newValue) => this.props.updateExerciseWeight(this.props.id, newValue)}
+                  allowFloats={true}
                 />
               </FormGroup>
               <FormGroup styleName="stretch">
                 <Caption>Exercise notes:</Caption>
                 <TextInput
-                  // onChangeText={this.props.updateTrainingName}
-                  // value={this.props.trainingForm.trainingName}
+                  value={this.props.exercise.userNote}
+                  onChangeText={(newValue) => this.props.updateExerciseUserNote(this.props.id, newValue)}
                 />
               </FormGroup>
               <Divider styleName="line" />
@@ -100,7 +116,7 @@ export class CurrentTrainingExercise extends React.Component {
                 onPress={() => this.props.updateFinishedSet(this.props.id, index)}
               >
                 {
-                  setDone
+                  Number.isInteger(setDone)
                     ? <Text>{setDone.toString()}</Text>
                     : <MaterialCommunityIcons name='plus' size={16} />
                 }
@@ -124,18 +140,12 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     updateFinishedSet: (exerciseId, setId) =>
-      dispatch(TrainingInProgressFromRedux.updateFinishedSet({exerciseId, setId}))
+      dispatch(TrainingInProgressFromRedux.updateFinishedSet({exerciseId, setId})),
+    updateExerciseUserNote: (exerciseId, note) =>
+      dispatch(TrainingInProgressFromRedux.updateExerciseUserNote({exerciseId, note})),
+    updateExerciseWeight: (exerciseId, weight) =>
+      dispatch(TrainingInProgressFromRedux.updateExerciseWeight({exerciseId, weight})),
   }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CurrentTrainingExercise)
-// // Prop type warnings
-// CurrentTrainingExercise.propTypes = {
-//   someProperty: React.PropTypes.object,
-//   someSetting: React.PropTypes.bool.isRequired
-// }
-//
-// // Defaults for props
-// CurrentTrainingExercise.defaultProps = {
-//   someSetting: false
-// }

@@ -14,7 +14,7 @@ import { call, put, select } from 'redux-saga/effects'
 import { NavigationActions } from 'react-navigation'
 import TrainingInProgressFromRedux from '../Redux/TrainingInProgressFromRedux'
 import TimerRedux from '../Redux/TimerRedux'
-import { pipe, propOr, find } from 'ramda'
+import { pipe, propOr, find, path, prop, all} from 'ramda'
 
 export function * startNewTraining ({payload}) {
   const state = yield select()
@@ -28,7 +28,22 @@ export function * startNewTraining ({payload}) {
   yield put(NavigationActions.navigate({routeName: 'TrainingInProgressScreen'}))
 }
 
-export function * updateFinishedSet () {
-  yield put(TimerRedux.reset())
-  yield put(TimerRedux.start())
+export function * updateFinishedSet ({payload}) {
+  const { exerciseId } = payload;
+  const state = yield select()
+
+  const currentExercise = path(['trainingInProgressForm', 'exercises', exerciseId], state)
+  const exerciseFinished = pipe(
+    prop('setsDone'),
+    all(Number.isInteger)
+  )(currentExercise)
+
+  if (exerciseFinished) {
+    yield put(TimerRedux.stop())
+    yield put(TimerRedux.reset())
+    yield put(TrainingInProgressFromRedux.nextExercise())
+  } else {
+    yield put(TimerRedux.reset())
+    yield put(TimerRedux.start())
+  }
 }

@@ -37,7 +37,7 @@ class CurrentTraining extends React.Component {
     }
 
     return (
-      <View style={styles.container}>
+      <View>
         <KeyboardAvoidingView behavior='position'>
           {
             this.props.hasTrainingInProgress ?

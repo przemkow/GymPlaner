@@ -2,7 +2,8 @@ import React, { PropTypes } from 'react'
 import { ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 import CurrentTrainingExercise from '../Components/CurrentTrainingExercise'
-import { View, Text, Button, Divider, Caption, Title, } from '@shoutem/ui'
+import { FormGroup, TextInput, Text, Button, Divider, Caption, Title, } from '@shoutem/ui'
+import TrainingInProgressFromRedux from '../Redux/TrainingInProgressFromRedux'
 
 // Styles
 import styles from './Styles/TrainingInProgressStyle'
@@ -23,7 +24,20 @@ class TrainingInProgress extends React.Component {
               isCurrent={index === this.props.training.currentExercise} key={index.toString()}/>
           ))
         }
-
+        <Divider/>
+        <FormGroup styleName="stretch">
+          <Caption>General training notes:</Caption>
+          <TextInput
+            value={this.props.training.userNote}
+            onChangeText={(newValue) => this.props.updateTrainingUserNote(newValue)}
+          />
+        </FormGroup>
+        <Button
+          styleName="secondary"
+          // onPress={() => this.props.navigation.navigate('TrainingInProgressScreen')}
+        >
+          <Text>SAVE TRAINING</Text>
+        </Button>
       </ScrollView>
     )
   }
@@ -37,6 +51,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    updateTrainingUserNote: (note) =>
+      dispatch(TrainingInProgressFromRedux.updateTrainingUserNote({note})),
   }
 }
 
