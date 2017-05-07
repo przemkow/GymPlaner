@@ -16,7 +16,8 @@ export default () => {
     trainingForm: require('./TrainingFormRedux').reducer,
     trainings: require('./TrainingsRedux').reducer,
     trainingInProgressForm: require('./TrainingInProgressFromRedux').reducer,
-    timer: require('./TimerRedux').reducer
+    timer: require('./TimerRedux').reducer,
+    trainingsArchive: require('./TrainingsArchiveRedux').reducer
   })
 
   return configureStore(rootReducer, rootSaga)

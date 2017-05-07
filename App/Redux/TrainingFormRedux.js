@@ -20,7 +20,7 @@ export default Creators
 
 /* ------------- Initial State ------------- */
 export const newExerciseModel = {
-  exerciseName: null,
+  exerciseName: '',
   breakTime: 90,
   weight: 40,
   sets: 5,
@@ -32,7 +32,7 @@ export const INITIAL_STATE = {
     id: null
   },
   model: {
-    trainingName: null,
+    trainingName: '',
     exercises: [newExerciseModel]
   },
   identity: 'trainingForm'

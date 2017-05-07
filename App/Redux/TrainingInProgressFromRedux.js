@@ -20,7 +20,14 @@ export default Creators
 
 /* ------------- Initial State ------------- */
 
-export const INITIAL_STATE = {}
+export const INITIAL_STATE = {
+  trainingId: null,
+  date: null,
+  trainingName: '',
+  currentExercise: 0,
+  exercises: [],
+  userNote: null
+}
 
 /* ------------- Reducers ------------- */
 

@@ -14,6 +14,8 @@ import { call, put, select } from 'redux-saga/effects'
 import { NavigationActions } from 'react-navigation'
 import TrainingInProgressFromRedux from '../Redux/TrainingInProgressFromRedux'
 import TimerRedux from '../Redux/TimerRedux'
+import TrainingsArchiveRedux from '../Redux/TrainingsArchiveRedux'
+
 import { pipe, propOr, find, path, prop, all} from 'ramda'
 
 export function * startNewTraining ({payload}) {
@@ -49,4 +51,9 @@ export function * updateFinishedSet ({payload}) {
 }
 
 export function * saveTraining () {
+  const state = yield select()
+  const trainingInProgress = prop('trainingInProgressForm', state)
+  yield put(TrainingsArchiveRedux.addTraining({trainingInProgress}))
+  yield put(NavigationActions.back())
+  yield put(TrainingInProgressFromRedux.clearForm())
 }
