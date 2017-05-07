@@ -8,18 +8,16 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 const TrainingsHistoryNavigation = StackNavigator({
   TrainingsHistory: {
     screen: TrainingsHistory,
-    navigationOptions: {
+    navigationOptions: ({navigation}) => ({
       title: 'Your trainings',
-      header: (navigation) => ({
-        left: (
-          <MaterialCommunityIcons.Button
-            name='menu'
-            color='#000000' backgroundColor='transparent'
-            onPress={() => navigation.navigate('DrawerOpen')}
-          />
-        )
-      })
-    }
+      headerLeft: (
+        <MaterialCommunityIcons.Button
+          name='menu'
+          color='#000000' backgroundColor='transparent'
+          onPress={() => navigation.navigate('DrawerOpen')}
+        />
+      )
+    })
   },
   TrainingHistory: {
     screen: TrainingHistory,

@@ -7,18 +7,16 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 const CalendarNavigation = StackNavigator({
   CalendarScreen: {
     screen: Calendar,
-    navigationOptions: {
+    navigationOptions: ({navigation}) => ({
       title: 'Calendar',
-      header: (navigation) => ({
-        left: (
-          <MaterialCommunityIcons.Button
-            name='menu'
-            color='#000000' backgroundColor='transparent'
-            onPress={() => navigation.navigate('DrawerOpen')}
-          />
-        )
-      })
-    }
+      headerLeft: (
+        <MaterialCommunityIcons.Button
+          name='menu'
+          color='#000000' backgroundColor='transparent'
+          onPress={() => navigation.navigate('DrawerOpen')}
+        />
+      )
+    })
   }
 }, {
   initialRouteName: 'CalendarScreen'

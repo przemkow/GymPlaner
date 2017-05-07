@@ -8,18 +8,16 @@ import TrainingInProgress from '../../../Containers/TrainingInProgress'
 const CurrentTrainingNavigation = StackNavigator({
   CurrentTrainingScreen: {
     screen: CurrentTraining,
-    navigationOptions: {
+    navigationOptions: ({navigation}) => ({
       title: 'Current training',
-      header: (navigation) => ({
-        left: (
-          <MaterialCommunityIcons.Button
-            name='menu'
-            color='#000000' backgroundColor='transparent'
-            onPress={() => navigation.navigate('DrawerOpen')}
-          />
-        )
-      })
-    }
+      headerLeft: (
+        <MaterialCommunityIcons.Button
+          name='menu'
+          color='#000000' backgroundColor='transparent'
+          onPress={() => navigation.navigate('DrawerOpen')}
+        />
+      )
+    })
   },
   TrainingInProgressScreen: {
     screen: TrainingInProgress,

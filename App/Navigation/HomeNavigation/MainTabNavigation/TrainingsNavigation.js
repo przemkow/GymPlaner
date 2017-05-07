@@ -9,18 +9,16 @@ import EditTraining from '../../../Containers/EditTrainingScreen'
 const TrainingsNavigation = StackNavigator({
   TrainingsListScreen: {
     screen: TrainingsList,
-    navigationOptions: {
+    navigationOptions: ({navigation}) => ({
       title: 'Trainings',
-      header: (navigation) => ({
-        left: (
-          <MaterialCommunityIcons.Button
-            name='menu'
-            color='#000000' backgroundColor='transparent'
-            onPress={() => navigation.navigate('DrawerOpen')}
-          />
-        )
-      })
-    }
+      headerLeft: (
+        <MaterialCommunityIcons.Button
+          name='menu'
+          color='#000000' backgroundColor='transparent'
+          onPress={() => navigation.navigate('DrawerOpen')}
+        />
+      )
+    })
   },
   NewTrainingScreen: {
     screen: NewTraining,

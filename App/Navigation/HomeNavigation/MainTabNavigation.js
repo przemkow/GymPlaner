@@ -11,28 +11,22 @@ const MainTabNavigation = TabNavigator({
   CurrentTrainingNavigation: {
     screen: CurrentTrainingNavigation,
     navigationOptions: {
-      tabBar: {
-        label: 'Current training',
-        icon: ({ tintColor }) => (<MaterialCommunityIcons name='camera-timer' size={25} color={tintColor} />)
-      }
+      tabBarLabel: 'Current training',
+      tabBarIcon: ({ tintColor }) => (<MaterialCommunityIcons name='camera-timer' size={25} color={tintColor} />)
     }
   },
   TrainingsNavigation: {
     screen: TrainingsNavigation,
     navigationOptions: {
-      tabBar: {
-        label: 'Trainings',
-        icon: ({ tintColor }) => (<MaterialCommunityIcons name='weight-kilogram' size={25} color={tintColor} />)
-      }
+      tabBarLabel: 'Trainings',
+      tabBarIcon: ({ tintColor }) => (<MaterialCommunityIcons name='weight-kilogram' size={25} color={tintColor} />)
     }
   },
   CalendarNavigation: {
     screen: CalendarNavigation,
     navigationOptions: {
-      tabBar: {
-        label: 'Calendar',
-        icon: ({ tintColor }) => (<MaterialCommunityIcons name='calendar' size={25} color={tintColor} />)
-      }
+      tabBarLabel: 'Calendar',
+      tabBarIcon: ({ tintColor }) => (<MaterialCommunityIcons name='calendar' size={25} color={tintColor} />)
     }
   }
 }, {
