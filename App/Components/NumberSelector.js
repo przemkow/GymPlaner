@@ -60,7 +60,7 @@ export default class NumberSelector extends React.Component {
           value={this.state.inputValue}
           defaultValue={toDisplayFormat(this.props.value)}
           keyboardType="numeric"
-          style={{width: 120, textAlign: 'center'}}
+          style={{width: 70, textAlign: 'center'}}
         />
         {
           this.props.allowFloats ? (

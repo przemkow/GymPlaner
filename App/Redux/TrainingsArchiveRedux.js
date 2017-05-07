@@ -1,6 +1,6 @@
 import { createReducer, createActions } from 'reduxsauce'
 import { append } from 'ramda'
-
+import guid from '../Lib/Guid'
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
@@ -16,7 +16,15 @@ export const INITIAL_STATE = []
 
 /* ------------- Reducers ------------- */
 
-export const addTraining = (state, {payload}) => append(payload.trainingInProgress, state)
+export const addTraining = (state, {payload}) => {
+  const finishedTraining = {
+    key: {
+      id: guid()
+    },
+    model: payload.trainingInProgress
+  }
+  return append(finishedTraining, state)
+}
 
 /* ------------- Hookup Reducers To Types ------------- */
 

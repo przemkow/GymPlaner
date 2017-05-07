@@ -17,9 +17,13 @@ class TrainingsList extends React.Component {
     editTraining: PropTypes.func,
   }
 
+  constructor (props) {
+    super(props)
+    this.listViewDataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+  }
+
   render () {
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    const trainingsDS = ds.cloneWithRows(this.props.trainings)
+    const trainingsDS = this.listViewDataSource.cloneWithRows(this.props.trainings)
     return (
       <View style={styles.container}>
         <KeyboardAvoidingView behavior='position'>
