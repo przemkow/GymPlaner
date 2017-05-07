@@ -32,11 +32,13 @@ export default (rootReducer, rootSaga) => {
 
   // if Reactotron is enabled (default for __DEV__), we'll create the store through Reactotron
   const createAppropriateStore = Config.useReactotron ? console.tron.createStore : createStore
-  enhancers.push(devTools({
-    name: 'GymPlaner',
-    realtime: true,
-    port: 8000
-  }))
+  if (__DEV__) {
+    enhancers.push(devTools({
+      name: 'GymPlaner',
+      realtime: true,
+      port: 8000
+    }))
+  }
   const store = createAppropriateStore(rootReducer, compose(...enhancers))
 
   // configure persistStore and check reducer version number

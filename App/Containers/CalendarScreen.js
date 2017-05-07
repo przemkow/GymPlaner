@@ -14,7 +14,8 @@ class Calendar extends React.Component {
       <ScrollView style={styles.container}>
         <KeyboardAvoidingView behavior='padding'>
           <Text>Calendar Screen</Text>
-          <Examples/>
+          {/*<Examples/>*/}
+          <Text>{__DEV__ ? "DEV" : "PROD"}</Text>
         </KeyboardAvoidingView>
       </ScrollView>
     )

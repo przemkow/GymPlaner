@@ -30,6 +30,8 @@ const MainTabNavigation = TabNavigator({
     }
   }
 }, {
+  initialRouteName: 'CurrentTrainingNavigation',
+  lazy: true,
   tabBarOptions: {
     activeTintColor: '#e91e63'
   }
