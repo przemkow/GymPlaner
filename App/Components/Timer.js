@@ -11,18 +11,24 @@ export class Timer extends React.Component {
     visible: PropTypes.bool
   }
 
+  constructor(props) {
+    super(props);
+    this.timerExpanded = false;
+  }
   componentWillMount () {
     this.viewHeight = new Animated.Value(0);
     this.borderBottomWidth = new Animated.Value(0);
   }
 
   animationsHandler () {
-    if (this.props.timer.isCounting && this.props.visible) {
+    if (this.props.timer.isCounting && this.props.visible && !this.timerExpanded) {
+      this.timerExpanded = true;
       Animated.timing(this.viewHeight, {
         toValue: 80,
         duration: 500
       }).start()
-    } else {
+    } else if ((!this.props.timer.isCounting || !this.props.visible) && this.timerExpanded) {
+      this.timerExpanded = false;
       Animated.timing(this.viewHeight, {
         toValue: 0,
         duration: 500

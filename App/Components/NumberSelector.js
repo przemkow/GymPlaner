@@ -2,7 +2,7 @@ import React , {PropTypes} from 'react'
 import { Button, View, Text, TextInput } from '@shoutem/ui'
 import styles from './Styles/NumberSelectorStyle'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
-
+import { equals } from 'ramda'
 const toDisplayFormat = (number) => Number.isFinite(number) ? number.toString() : ''
 const toReturnFormat = (string, allowFloats) => allowFloats ? parseFloat(string) : parseInt(string)
 export default class NumberSelector extends React.Component {
@@ -17,7 +17,6 @@ export default class NumberSelector extends React.Component {
       this.setState({
         inputValue: newValue
       })
-      this.props.onChange(toReturnFormat(newValue, this.props.allowFloats))
     } else if ((this.props.allowFloats && newValue.match(/^(\d)+(\.)$/g)) || newValue === '') {
       this.setState({
         inputValue: newValue
@@ -36,6 +35,10 @@ export default class NumberSelector extends React.Component {
     this.setState({
       inputValue: toDisplayFormat(nextProps.value)
     })
+  }
+
+  shouldComponentUpdate (nextProps, nextState) {
+    return !equals(nextProps, this.props)
   }
 
   render () {

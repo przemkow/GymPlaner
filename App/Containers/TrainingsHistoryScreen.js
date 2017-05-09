@@ -1,14 +1,14 @@
 import React, { PropTypes } from 'react'
 import { TouchableOpacity, ListView} from 'react-native'
 import { connect } from 'react-redux'
-import { View, Text, Row, Divider, Icon } from '@shoutem/ui'
+import { View, Text, Row, Divider, Icon, Subtitle } from '@shoutem/ui'
 import { prop } from 'ramda'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
 
 // Styles
 import styles from './Styles/TrainingsHistoryScreenStyle'
-
+import moment from 'moment'
 class TrainingsHistory extends React.Component {
   static propTypes = {
     archivedTrainings: PropTypes.array
@@ -22,7 +22,7 @@ class TrainingsHistory extends React.Component {
   render () {
     const trainingsDS = this.listViewDataSource.cloneWithRows(this.props.archivedTrainings)
     return (
-      <View style={styles.container}>
+      <View>
         <ListView
           dataSource={trainingsDS}
           scrollEnabled={false}
@@ -31,10 +31,11 @@ class TrainingsHistory extends React.Component {
               onPress={() => this.props.navigation.navigate('TrainingHistory', {trainingId: training.key.id})}
             >
             <Row styleName="small">
-              <Text>{training.model.trainingName}</Text>
-
-                <Icon styleName="disclosure" name="right-arrow" />
-
+              <View styleName="vertical">
+                <Subtitle>{training.model.trainingName}</Subtitle>
+                <Text numberOfLines={1}>{moment(training.model.date).fromNow()}</Text>
+              </View>
+              <Icon styleName="disclosure" name="right-arrow" />
             </Row>
             </TouchableOpacity>)
           }

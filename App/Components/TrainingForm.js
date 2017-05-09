@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react'
+import { ListView } from 'react-native'
 import styles from './Styles/TrainingFormStyle'
 import { connect } from 'react-redux'
 import { Button, View, Text, TextInput, Caption, FormGroup, Divider} from '@shoutem/ui'
@@ -14,9 +15,15 @@ export class TrainingForm extends React.Component {
     onSave: PropTypes.func
   }
 
+  constructor (props) {
+    super(props)
+    this.listViewDataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+  }
+
   render () {
+    const trainingsDS = this.listViewDataSource.cloneWithRows(this.props.trainingForm.exercises)
     return (
-      <View style={styles.container}>
+      <View>
         <FormGroup styleName="stretch">
           <Caption>Training name:</Caption>
           <TextInput

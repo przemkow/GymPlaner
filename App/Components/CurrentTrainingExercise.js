@@ -18,7 +18,6 @@ export class CurrentTrainingExercise extends React.Component {
 
   componentWillMount () {
     this.borderWidth = new Animated.Value(0);
-    this.editContainerHeight = new Animated.Value(0);
   }
 
   constructor(props) {
@@ -28,45 +27,15 @@ export class CurrentTrainingExercise extends React.Component {
     }
   }
 
-  animationsHandler () {
-    if (this.props.isCurrent) {
-      Animated.timing(this.borderWidth, {
-        toValue: 3,
-        duration: 500
-      }).start()
-    } else {
-      Animated.timing(this.borderWidth, {
-        toValue: 0,
-        duration: 500
-      }).start()
-    }
-
-    if (this.state.editVisible) {
-      Animated.timing(this.editContainerHeight, {
-        toValue: 500,
-        duration: 500
-      }).start()
-    } else {
-      Animated.timing(this.editContainerHeight, {
-        toValue: 0,
-        duration: 500
-      }).start()
-    }
-  }
-
   render () {
-    this.animationsHandler()
     let viewContainerStyles = {
       borderColor: '#A0D831',
       borderBottomWidth: 0,
     }
-    viewContainerStyles.borderWidth = this.borderWidth
-    let editContainer = {
-      maxHeight: this.editContainerHeight,
-    }
+    viewContainerStyles.borderWidth = this.props.isCurrent ? 3 : 0
     return (
       <View style={{marginTop: 10}}>
-        <Animated.View style={viewContainerStyles}>
+        <View style={viewContainerStyles}>
           <Divider styleName="section-header">
             <View>
               <Caption>{this.props.exercise.exerciseName}</Caption>
@@ -114,6 +83,7 @@ export class CurrentTrainingExercise extends React.Component {
               <Button
                 styleName="full-width"
                 onPress={() => this.props.updateFinishedSet(this.props.id, index)}
+                key={index}
               >
                 {
                   Number.isInteger(setDone)
@@ -125,7 +95,7 @@ export class CurrentTrainingExercise extends React.Component {
           }
         </ViewSH>
         <Divider styleName="line" />
-        </Animated.View>
+        </View>
         <Timer breakTime={this.props.exercise.breakTime} visible={this.props.isCurrent}/>
       </View>
     )

@@ -20,10 +20,8 @@ class TrainingHistoryScreen extends React.Component {
   // }
 
   render () {
-    const {state} = this.props.navigation;
-
     return (
-      <View style={styles.container}>
+      <View>
         <Text>{this.props.training.trainingName}</Text>
       </View>
     )

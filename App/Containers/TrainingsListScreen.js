@@ -25,7 +25,7 @@ class TrainingsList extends React.Component {
   render () {
     const trainingsDS = this.listViewDataSource.cloneWithRows(this.props.trainings)
     return (
-      <View style={styles.container}>
+      <View>
         <KeyboardAvoidingView behavior='position'>
           <ListView
             dataSource={trainingsDS}
