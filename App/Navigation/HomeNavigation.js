@@ -1,6 +1,7 @@
 import { DrawerNavigator } from 'react-navigation'
 import MainTabNavigation from './HomeNavigation/MainTabNavigation'
 import TrainingsHistoryNavigation from './TrainingsHistory/TrainingsHistoryNavigation'
+import DrawerContent from '../Components/DrawerContent'
 // Manifest of possible screens
 const HomeNavigation = DrawerNavigator({
   MainTabNavigation: {
@@ -16,6 +17,7 @@ const HomeNavigation = DrawerNavigator({
     }
   }
 }, {
+  contentComponent: DrawerContent,
   initialRouteName: 'MainTabNavigation'
 })
 
