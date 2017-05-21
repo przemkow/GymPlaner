@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
 import TrainingInProgressFromRedux from '../Redux/TrainingInProgressFromRedux'
-import { Button, Text ,Row, View, Icon, Divider } from '@shoutem/ui'
+import { Button, Text ,Row, View, Icon, Divider, DropDownMenu} from '@shoutem/ui'
 // Styles
 import styles from './Styles/CurrentTrainingScreenStyle'
 import { pathOr, pipe, propOr, isEmpty, not } from 'ramda'

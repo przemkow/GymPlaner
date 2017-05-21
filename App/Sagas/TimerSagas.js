@@ -13,6 +13,7 @@
 import { call, put, take, race } from 'redux-saga/effects'
 import { delay } from 'redux-saga'
 import TimerActions, { TimerTypes } from '../Redux/TimerRedux'
+import BackgroundTimer from 'react-native-background-timer';
 
 export function * timerTick (api, action) {
   while (true) {

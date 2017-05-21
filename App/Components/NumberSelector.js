@@ -17,10 +17,12 @@ export default class NumberSelector extends React.Component {
       this.setState({
         inputValue: newValue
       })
+      this.props.onChange(toReturnFormat(newValue))
     } else if ((this.props.allowFloats && newValue.match(/^(\d)+(\.)$/g)) || newValue === '') {
       this.setState({
         inputValue: newValue
       })
+      this.props.onChange(toReturnFormat(newValue))
     }
   }
 
@@ -38,7 +40,7 @@ export default class NumberSelector extends React.Component {
   }
 
   shouldComponentUpdate (nextProps, nextState) {
-    return !equals(nextProps, this.props)
+    return !equals(nextProps, this.props) || !equals(nextState, this.state)
   }
 
   render () {
